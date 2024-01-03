@@ -101,7 +101,7 @@ for I=4:4
     Pi = zeros(size(X,1),ET);
     tic
     for runs = 1:ET
-        pi_runs = CDC_DR_AE(X,K);
+        pi_runs = CDC_DR_SC(X,K);
         Pi(:,runs) = pi_runs;
     end
     RunningTimes(I,4) = toc;

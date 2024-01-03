@@ -1,6 +1,6 @@
-function pi = CDC_DR_AE(data,k)
-[D,~]=CDC_DR(data,k,'AE','Joint');
-% [D,~]=CDC_DR(data,k,'SC','Joint');
+function pi = CDC_DR_SC(data,k)
+% [D,~]=CDC_DR(data,k,'AE','Joint');
+[D,~]=CDC_DR(data,k,'SC','Joint');
 pi=kmeans(D,k);
 end
 
