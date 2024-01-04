@@ -1,7 +1,7 @@
 load('Depths_list.mat')
 % For one-sided signrank
 alpha = 0.05;
-algo_maxDepth = {'SigTree','CUBT_{Max}','CUBT^{Ham}','CUBT^{MI}','IMM','RDM','SHA'};
+algo_avgDepth = {'SigTree','CUBT_{Max}','CUBT^{Ham}','CUBT^{MI}','IMM','RDM','SHA'};
 
 % #[1]SHA [2]RDM [3]IMM
 avgDepth_list = [SigTree_Depth(:,3) CUBT_maxTree_Depth(:,3) CUBT_Ham_Depth(:,3) CUBT_MI_Depth(:,3) AvgLeafDepth(:,3) AvgLeafDepth(:,2) AvgLeafDepth(:,1)];

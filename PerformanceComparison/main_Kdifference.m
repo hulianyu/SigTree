@@ -1,5 +1,5 @@
 load('Depths_nLeaf.mat')
-% K_AverageDifferemce
+% Average_Difference (K)
 
 KAD = zeros(4,1);
 algo = {'K','SigTree','CUBT_{Max}','CUBT^{Ham}','CUBT^{MI}'};

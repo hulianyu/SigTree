@@ -6,7 +6,7 @@ algo = {'SigTree','CUBT^{Ham}','CUBT^{MI}','k-modes','Entropy','CDE','CDC\_DR','
 %% Faster
 h_fast = zeros(10,1);
 for j = 2:11
-    [h_fast(j-1,1), p, ci, stats] = ttest2(RunningTimes_list(:,j), RunningTimes_list(:,1), 'Tail', 'left');
+    h_fast(j-1,1) = signrank(RunningTimes_list(:,j), RunningTimes_list(:,1), 'Tail', 'left');
 end
 Faster_algo = {'k-modes','CDE','CDC\_DR','IMM','RDM','SHA'};
 %% Slower

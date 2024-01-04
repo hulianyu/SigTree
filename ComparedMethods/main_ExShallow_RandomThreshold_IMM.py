@@ -34,23 +34,18 @@ for i in range(0, 18):
     df = pd.read_csv(txt_path, delimiter=',', header=None, index_col=False)
     # Initialize OneHotEncoder with dtype=int to ensure numerical output
     encoder = OneHotEncoder(dtype=int)
-    df_encoded = encoder.fit_transform(df).toarray()
-    df_numerical = pd.DataFrame(df_encoded, columns=encoder.get_feature_names_out())
-    data = encoder.fit_transform(df_numerical).toarray()  # This is a NumPy array
+    df_encoded = encoder.fit_transform(df)
+    data = df_encoded.toarray()  # This is a NumPy array
     K = data_K_list[i]
 
     for run in range(num_runs):
         # ExShallow
         start_SHA = time.time()
         SHA = ShallowTree(K)
-        # Fit the tree immediately; kmeans will run internally
-        # SHA.fit(data)
         # Construct the tree, and return cluster labels
         SHA_pi.append(SHA.fit_predict(data))
         end_SHA = time.time()
         Execution_times[i, 0] = Execution_times[i, 0] + (end_SHA - start_SHA)
-        # Save the ndarray to a new txt file
-        # np.savetxt(data_obj_list[i] + "_SHA_pi.txt", SHA_pi, fmt="%d")
         # Max Depth, Average Leaf Depth
         MaxDepth[i, 0] = MaxDepth[i, 0] + SHA._max_depth()
         AvgLeafDepth[i, 0] = AvgLeafDepth[i, 0] + SHA.average_leaf_depth()
@@ -61,14 +56,10 @@ for i in range(0, 18):
         # RandomThreshold #
         start_RDM = time.time()
         RDM = RandomThresholdTree(K)
-        # Fit the tree immediately; kmeans will run internally
-        # RDM.fit(data)
         # Construct the tree, and return cluster labels
         RDM_pi.append(RDM.fit_predict(data))
         end_RDM = time.time()
         Execution_times[i, 1] = Execution_times[i, 1] + (end_RDM - start_RDM)
-        # Save the ndarray to a new txt file
-        # np.savetxt(data_obj_list[i] + "_RDM_pi.txt", RDM_pi, fmt="%d")
         # Max Depth, Average Leaf Depth
         MaxDepth[i, 1] = MaxDepth[i, 1] + RDM._max_depth()
         AvgLeafDepth[i, 1] = AvgLeafDepth[i, 1] + RDM.average_leaf_depth()
@@ -77,15 +68,12 @@ for i in range(0, 18):
         # RDM.plot('eg_RDM_pi')
 
         # IMM #
-        # Initialize tree with 3 leaves, predicting 3 clusters
         start_IMM = time.time()
         IMM = Tree(k=K)
         # Construct the tree, and return cluster labels
         IMM_pi.append(IMM.fit_predict(data))
         end_IMM = time.time()
         Execution_times[i, 2] = Execution_times[i, 2] + (end_IMM - start_IMM)
-        # Save the ndarray to a new txt file
-        # np.savetxt(data_obj_list[i] + "_IMM_pi.txt", IMM_pi, fmt="%d")
         # Max Depth, Average Leaf Depth
         MaxDepth[i, 2] = MaxDepth[i, 2] + IMM._max_depth()
         AvgLeafDepth[i, 2] = AvgLeafDepth[i, 2] + IMM.average_leaf_depth()
