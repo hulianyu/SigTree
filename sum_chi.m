@@ -9,7 +9,8 @@ for m_drop=1:M_drop
     x = X_drop(:,m_drop);
     df = (length(unique(x))-1);
     if df~=0
-        [tbl,chi,~] = crosstab(x,pi);
+%         [tbl,chi] = simplifiedCrosstab(x,pi);
+        [tbl,chi] = chi_squared_test_table(x,pi);
         %%
         % Check if the table is 2x2
         % if size(tbl, 1) == 2 && size(tbl, 2) == 2
@@ -37,5 +38,5 @@ for m_drop=1:M_drop
         dfs = dfs + df;
     end
 end
-pval = chi2cdf(chis,dfs,'upper');
+pval = simplifiedChi2cdf(chis,dfs); % 'upper'
 end
