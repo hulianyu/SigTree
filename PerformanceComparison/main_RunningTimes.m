@@ -8,10 +8,10 @@ h_fast = zeros(10,1);
 for j = 2:11
     h_fast(j-1,1) = signrank(RunningTimes_list(:,j), RunningTimes_list(:,1), 'Tail', 'left');
 end
-Faster_algo = {'k-modes','CDE','CDC\_DR','IMM','RDM','SHA'};
+Faster_algo = {'CDE','CDC\_DR','IMM','RDM','SHA'};
 %% Slower
 h_slow = zeros(10,1);
 for j = 2:11
     h_slow(j-1,1) = signrank(RunningTimes_list(:, 1), RunningTimes_list(:, j),'tail', 'left');
 end
-Slower_algo = {'DV','CUBT^{Ham}','CUBT^{MI}'};
+Slower_algo = {'DV','CUBT^{Ham}','CUBT^{MI}','Entropy'};
